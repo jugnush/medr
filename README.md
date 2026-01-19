@@ -1,41 +1,27 @@
 # MCP-Enabled Dynamic Renderer
+```text
 User / App
    |
    v
 Is intent valid?
- ├─ NO → Reject / Request clarification
- └─ YES
-        |
-        v
-Fetch component constraints (MCP)
-        |
-        v
-Did MCP return schema?
- ├─ NO → Fail safely (no UI)
- └─ YES
-        |
-        v
-Send intent + constraints to LLM
-        |
-        v
-Did LLM return structured JSON?
- ├─ NO → Fail safely
- └─ YES
-        |
-        v
-Validation Gateway
- (props, accessibility, mode, whitelist)
-        |
-        v
-All rules pass?
- ├─ NO → Block rendering
- └─ YES
-        |
-        v
-Deterministic Renderer
-        |
-        v
-Final UI Output
+ ├─ NO  → Reject / Clarify
+ └─ YES → Fetch MCP Constraints
+            |
+            v
+        Schema Found?
+ ├─ NO  → Fail Safely
+ └─ YES → LLM Planner
+            |
+            v
+     Structured JSON?
+ ├─ NO  → Fail Safely
+ └─ YES → Validation Gateway
+            |
+            v
+        Rules Pass?
+ ├─ NO  → Block Render
+ └─ YES → Deterministic Renderer → Final UI
+
 
 ## Project Overview
 
