@@ -1,5 +1,41 @@
 # MCP-Enabled Dynamic Renderer
-
+[User Intent]
+     |
+     v
+Is intent valid?
+ ├─ NO → Reject / Ask for clarification
+ └─ YES
+       |
+       v
+Fetch component constraints from MCP
+       |
+       v
+Did MCP return valid schema?
+ ├─ NO → Fail safely (no UI generated)
+ └─ YES
+       |
+       v
+Send intent + constraints to LLM
+       |
+       v
+Did LLM return structured JSON?
+ ├─ NO → Fail safely
+ └─ YES
+       |
+       v
+Validation Gateway
+       |
+       v
+Are all rules satisfied?
+ (props, a11y, mode, whitelist)
+ ├─ NO → Block rendering
+ └─ YES
+       |
+       v
+Render UI deterministically
+       |
+       v
+Final Visual Output
 ## Project Overview
 
 The MCP-Enabled Dynamic Renderer is a system architecture designed to bridge the gap between high-level user intent and low-level React component rendering. By utilizing the Model Context Protocol (MCP), the system ensures that dynamically generated interfaces are strictly validated, accessible, and contextually accurate according to defined metadata.
